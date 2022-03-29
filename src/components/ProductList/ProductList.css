@@ -16,11 +16,14 @@
     display: inline-block;
     margin: 10px;
     padding: auto;
-    color: var(--color-letter);
     transition: all 500ms ease;
 }
 .product:hover{
     background: var(--color-dark-light);
+}
+
+.product-link{
+    color: var(--color-letter);
 }
 
 .product h2{
@@ -37,4 +40,20 @@
     margin: 10px;
     font-size: 20px;
     font-weight: 300;
+}
+
+.delete{
+    color: var(--color-background);
+    background: var(--color-letter);
+    font-size: 1rem;
+    border-radius: 2px;
+    margin-top: 10px;
+    border: none;
+    padding: 1rem 0;
+    width: 100%;
+    cursor: pointer;
+    transition: all 500ms ease;
+}
+.delete:hover{
+    background: var(--color-letter-variant);
 }

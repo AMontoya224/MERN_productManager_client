@@ -9,7 +9,8 @@
     --color-danger: #bb1422;
     --color-sucess: #41f1b6;
     --color-warning: #ffbb55;
-    --color-letter: #222;
+    --color-letter: rgb(29, 29, 29);
+    --color-letter-variant: rgb(54, 54, 54);
     --color-white: #fff;
     --color-black: #202528;
     --color-black-variant: #303538;
@@ -23,6 +24,7 @@
 
 .dark-theme-variables{
     --color-letter: #eee;
+    --color-letter-variant: rgb(219, 219, 219);
     --color-background: #181a1e;
     --color-dark: #edeffd;
     --color-dark-variant: #a3bdcc;

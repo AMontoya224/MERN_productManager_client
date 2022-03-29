@@ -31,3 +31,7 @@
     text-decoration: underline;
     font-size: 20px;
 }
+
+.submit-link{
+    color: var(--color-white);
+}

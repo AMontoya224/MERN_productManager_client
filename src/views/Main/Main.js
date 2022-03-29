@@ -6,14 +6,13 @@ import ProductList from '../../components/ProductList/ProductList';
 
 
 export default () => {
+    const [products, setProducts] = useState( [] );
+    const [loaded, setLoaded] = useState( false );
     const [iconTheme, setIconTheme] = useState( false );
     const changeTheme = () => {
         document.body.classList.toggle( 'dark-theme-variables' );
         setIconTheme( !iconTheme );
     };
-
-    const [products, setProducts] = useState( [] );
-    const [loaded, setLoaded] = useState( false );
 
     useEffect( ()=>{
         axios.get( 'http://localhost:8000/api/products' )
@@ -23,6 +22,10 @@ export default () => {
             });
     },[products] );
 
+    const removeFromDom = productId => {
+        setProducts( products.filter( product => product._id !== productId ) );
+    };
+
     return (
         <div className='Main'>
             <h1>
@@ -30,7 +33,7 @@ export default () => {
             </h1>
             <span className='material-icons theme-toggler' onClick={changeTheme}>{iconTheme ? "light_mode" : "dark_mode"}</span>
             <ProductForm/>
-            {loaded && <ProductList products={products}/>}
+            {loaded && <ProductList products={products} removeFromDom={removeFromDom} />}
         </div>
     );
 };

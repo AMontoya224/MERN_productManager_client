@@ -6,11 +6,19 @@ import './Details.css';
 
 export default props => {
     const [product, setProduct] = useState( {} );
+    let isCancelled = false;
+
     useEffect( () => {
+        isCancelled = false;
         axios.get( 'http://localhost:8000/api/products/' + props.match.params._id )
             .then( res => {
-                setProduct( {...res.data} )
-            })
+                if (!isCancelled) {
+                    setProduct( {...res.data} )
+                }
+            });
+            return () => {
+                isCancelled = true;
+              };
     }, [] );
 
     return (
@@ -19,7 +27,7 @@ export default props => {
                 {product.title}
             </h1>
             <div className='row'>
-                <span class="material-icons-outlined">add_photo_alternate</span>
+                <span className="material-icons-outlined">add_photo_alternate</span>
                 <div>
                     <p>
                         <b>Price:</b> $ {product.price}
@@ -27,9 +35,18 @@ export default props => {
                     <p>
                         <b>Description:</b> <i>"{product.description}"</i>.
                     </p>
+                    <Link to={`/` + product._id + `/edit`} className='submit-link' >
+                        <div className='submit'>
+                            Edit
+                        </div>
+                    </Link>
                 </div>
             </div>
-            <Link to={`/`} className='link'>Back to home</Link>
+            <Link  to={`/`} className='submit-link'>
+                <div className='delete'>
+                    Back to home
+                </div>
+            </Link>
         </div>
     );
 };
