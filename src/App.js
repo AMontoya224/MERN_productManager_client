@@ -13,10 +13,9 @@ function App() {
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet"></link>
       <BrowserRouter>
         <Switch>
-        <Route path="/products/:_id" render={ routeProps => <Detail {...routeProps} />} />
+          <Route path="/products/:_id" render={ routeProps => <Detail {...routeProps} />} />
           <Route path="/:id/edit" render={ (routeProps) => <Update {...routeProps} />}/>
           <Route path="/" render={ routeProps => <Main {...routeProps} />}/>
-          
         </Switch>
       </BrowserRouter>
     </div>

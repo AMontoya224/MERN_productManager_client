@@ -29,21 +29,21 @@ export default props  => {
             price,
             description
         })
-            .then( res => {
-                console.log( res );
-                setTitle( title );
-                setPrice( price );
-                setDescription( description );
-                setTitleError( '' );
-                setPriceError( '' );
-                setDescriptionError( '' );
-            })
-            .catch( err => {
-                console.log( err );
-                setTitleError( err.response.data.errors.title.message );
-                setPriceError( err.response.data.errors.price.message );
-                setDescriptionError( err.response.data.errors.description.message );
-            })
+        .then( res => {
+            console.log( res );
+            setTitle( '' );
+            setPrice( '' );
+            setDescription( '' );
+        })
+        .catch( err => {
+            console.log( err );
+            try{ setTitleError( err.response.data.errors.title.message ); }
+            catch(err) {};
+            try{ setPriceError( err.response.data.errors.price.message ); }
+            catch(err) {};
+            try{ setDescriptionError( err.response.data.errors.description.message ); }
+            catch(err) {};
+        })
     };
 
     return (
@@ -54,7 +54,8 @@ export default props  => {
             <form onSubmit={onSubmitUpdate}>
                 <div className='inp-container'>
                     <label htmlFor='title' className='inp'>
-                        <input type='text' id='title' className='inp-input' placeholder=' ' value={title} onChange = {e =>setTitle( e.target.value )} />
+                        <input type='text' id='title' className='inp-input' placeholder=' ' value={title} 
+                            onChange = {e => {setTitle( e.target.value ); setTitleError( '' )}} />
                         <span className='inp-label'>Title</span>
                         <span className='inp-focus'></span>
                         <p className='inp-error'>{titleError}</p>
@@ -62,7 +63,8 @@ export default props  => {
                 </div>
                 <div className='inp-container'>
                     <label htmlFor='price' className='inp'>
-                        <input type="number" step="0.01" id='price' className='inp-input' placeholder=' ' value={price} onChange = {e =>setPrice( e.target.value )} />
+                        <input type="number" step="0.01" id='price' className='inp-input' placeholder=' ' value={price} 
+                            onChange = {e => {setPrice( e.target.value ); setPriceError( '' )}} />
                         <span className='inp-label'>Price</span>
                         <span className='inp-focus'></span>
                         <p className='inp-error'>{priceError}</p>
@@ -70,7 +72,8 @@ export default props  => {
                 </div>
                 <div className='inp-container'>
                     <label htmlFor='description' className='inp'>
-                        <input type='text' id='description' className='inp-input' placeholder=' ' value={description} onChange = {e =>setDescription( e.target.value )} />
+                        <input type='text' id='description' className='inp-input' placeholder=' ' value={description} 
+                            onChange = {e => {setDescription( e.target.value ); setDescriptionError( '' );}} />
                         <span className='inp-label'>Description</span>
                         <span className='inp-focus'></span>
                         <p className='inp-error'>{descriptionError}</p>
